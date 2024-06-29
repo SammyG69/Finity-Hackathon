@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030668493261",
+    "project_id": "finity-app-dbca7",
+    "storage_bucket": "finity-app-dbca7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030668493261:android:e9a8fbb36cce49c2daa484",
+        "android_client_info": {
+          "package_name": "com.example.finityapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw8pEoV-4XxpAVMO4xgvC0is10in2DMzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
