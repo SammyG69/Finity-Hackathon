@@ -11,16 +11,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.finityapp.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<Transaction> transactions;
+    private RecyclerView recyclerView;
+    private MyAdapter userAdapter;
+    private ActivityMainBinding binding;
+
+    DatabaseReference databaseReference;
+    FirebaseDatabase database;
 
     Button button;
 
@@ -29,39 +42,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-            FirebaseDatabase database= FirebaseDatabase.getInstance();
-
-            button=findViewById(R.id.transactionButton);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Scanner myObj1 = new Scanner(System.in);
-                    System.out.println("Please enter your transaction date: ");
-                    String date= myObj1.nextLine();
-                    Scanner myObj2= new Scanner(System.in);
-                    System.out.println("Please enter your amount and category that the purchase goes in: ");
-                    String category= myObj2.nextLine();
-                    double amount= myObj2.nextDouble();
+        database=FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("Transactions");
 
 
-                }
-            });
+        FirebaseDatabase database= FirebaseDatabase.getInstance();
 
-            DatabaseReference myref= database.getReference("Transactions");
+        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-            myref.setValue("hello from our course");
+        recyclerView=binding.recyclerView;
 
-            myref.addValueEventListener(new ValueEventListener() {
-                TextView textview=findViewById(R.id.textView);
+        recyclerView.setAdapter(userAdapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this ));
+
+            //Fetch the data from firebase into recycler view
+            databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String value =snapshot.getValue(String.class);
-                    textview.setText(value);
+                   for (DataSnapshot dataSnapshot: snapshot.getChildren() ){
+                       Transaction transaction =dataSnapshot.getValue(Transaction.class);
+                       transactions.add(transaction);
+                   }
+
+                    userAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -70,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+        userAdapter=new MyAdapter(this, transactions);
 
 
-            return insets;
-        });
     }
 }

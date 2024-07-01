@@ -1,45 +1,57 @@
 package com.example.finityapp;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import java.util.Date;
 
-public class Transaction {
+public class Transaction extends BaseObservable {
 
-    private double amount;
+    private String amount;
 
-    private Date date;
+    private String date;
 
     private String Category;
 
-    public Transaction(double amount, Date date, String category) {
+    public Transaction(String amount, String date, String category) {
         this.amount = amount;
-        this.date = date;
+        this.date = String.valueOf(date);
         Category = category;
     }
 
     public Transaction() {
     }
 
-    public double getAmount() {
+    @Bindable
+    public String getAmount() {
         return amount;
+
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
+        notifyPropertyChanged(BR.amount);
     }
 
-    public Date getDate() {
+    @Bindable
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+
+    public void setDate(String date) {
+        this.date = String.valueOf(date);
+        notifyPropertyChanged(BR.date);
     }
 
+    @Bindable
     public String getCategory() {
         return Category;
+
     }
 
     public void setCategory(String category) {
         Category = category;
+        notifyPropertyChanged(BR.category);
     }
 }
