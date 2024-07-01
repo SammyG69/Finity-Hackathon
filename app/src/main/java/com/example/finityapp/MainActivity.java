@@ -1,6 +1,8 @@
 package com.example.finityapp;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -16,7 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Scanner;
+
 public class MainActivity extends AppCompatActivity {
+
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,24 @@ public class MainActivity extends AppCompatActivity {
 
             FirebaseDatabase database= FirebaseDatabase.getInstance();
 
-            DatabaseReference myref= database.getReference("messages");
+            button=findViewById(R.id.transactionButton);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Scanner myObj1 = new Scanner(System.in);
+                    System.out.println("Please enter your transaction date: ");
+                    String date= myObj1.nextLine();
+                    Scanner myObj2= new Scanner(System.in);
+                    System.out.println("Please enter your amount and category that the purchase goes in: ");
+                    String category= myObj2.nextLine();
+                    double amount= myObj2.nextDouble();
+
+
+                }
+            });
+
+            DatabaseReference myref= database.getReference("Transactions");
 
             myref.setValue("hello from our course");
 
@@ -46,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+
+
 
             return insets;
         });
