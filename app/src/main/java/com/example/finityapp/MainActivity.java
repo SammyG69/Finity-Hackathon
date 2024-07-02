@@ -1,6 +1,8 @@
 package com.example.finityapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,13 +29,9 @@ import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Transaction> transactions;
-    private RecyclerView recyclerView;
-    private MyAdapter userAdapter;
-    private ActivityMainBinding binding;
 
-    DatabaseReference databaseReference;
-    FirebaseDatabase database;
+    private static final String TAG = "MainActivity";
+
 
    Button button;
 
@@ -43,39 +41,26 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
+        button=findViewById(R.id.transactionButton);
+
+        Log.d(TAG, "onCreate: MainActivity started");
 
 
-        database=FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Transactions");
+        Log.d(TAG, "We are back yo");
 
-
-
-        recyclerView=binding.recyclerView;
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-            //Fetch the data from firebase into recycler view
-            databaseReference.addValueEventListener(new ValueEventListener() {
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                   for (DataSnapshot dataSnapshot: snapshot.getChildren() ){
-                       Transaction transaction =dataSnapshot.getValue(Transaction.class);
-                       transactions.add(transaction);
-                   }
+                public void onClick(View view) {
 
-                    userAdapter.notifyDataSetChanged();
-                }
+                    Log.d(TAG, "onClick: Transaction button clicked");
+                    Intent i = new Intent(
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                            getApplicationContext(), AddTransaction.class
+                    );
 
+                    startActivity(i);
                 }
             });
-
-        transactions=new ArrayList<>();
-        userAdapter=new MyAdapter(this, transactions);
-        recyclerView.setAdapter(userAdapter);
 
     }
 }

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".AddTransaction">
+
 
     <TextView
         android:id="@+id/add_title"
@@ -31,15 +33,14 @@
         tools:layout_editor_absoluteX="0dp" />
 
 
-
     <EditText
         android:id="@+id/amountField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="92dp"
         android:layout_marginBottom="5dp"
         android:text="Amount paid"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@+id/dateField"
         app:layout_constraintVertical_bias="0.281"
         tools:layout_editor_absoluteX="0dp" />
@@ -48,19 +49,20 @@
         android:id="@+id/categoryField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Category of Transaction"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginTop="88dp"
+        android:text="@string/category_of_transaction"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@+id/amountField"
         app:layout_constraintVertical_bias="0.502"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="137dp"
-        android:layout_height="46dp"
+        android:id="@+id/addButton"
+        android:layout_width="150dp"
+        android:layout_height="73dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:text="@string/add_transaction"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FinityApp</string>
+    <string name="category_of_transaction">Category of Transaction</string>
+    <string name="add_transaction">Add Transaction</string>
 </resources>
