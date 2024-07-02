@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database;
 
-    Button button;
+   Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +43,17 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        binding= DataBindingUtil.setContentView(this, R.layout.item_card);
+
+
         database=FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Transactions");
 
 
-        FirebaseDatabase database= FirebaseDatabase.getInstance();
-
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         recyclerView=binding.recyclerView;
 
-        recyclerView.setAdapter(userAdapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this ));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             //Fetch the data from firebase into recycler view
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -75,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+        transactions=new ArrayList<>();
         userAdapter=new MyAdapter(this, transactions);
-
+        recyclerView.setAdapter(userAdapter);
 
     }
 }

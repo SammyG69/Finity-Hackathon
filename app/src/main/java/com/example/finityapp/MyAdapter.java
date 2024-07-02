@@ -63,6 +63,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.UserViewHolder> {
                 @Override
                 public void onClick(View v) {
 
+                    int position=getAdapterPosition();
+
                 }
             });
         }

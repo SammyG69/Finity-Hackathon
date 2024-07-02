@@ -15,8 +15,8 @@ public class Transaction extends BaseObservable {
 
     public Transaction(String amount, String date, String category) {
         this.amount = amount;
-        this.date = String.valueOf(date);
-        Category = category;
+        this.date = date;
+        this.Category = category;
     }
 
     public Transaction() {
@@ -40,7 +40,7 @@ public class Transaction extends BaseObservable {
 
 
     public void setDate(String date) {
-        this.date = String.valueOf(date);
+        this.date = date;
         notifyPropertyChanged(BR.date);
     }
 
@@ -51,7 +51,7 @@ public class Transaction extends BaseObservable {
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.Category = category;
         notifyPropertyChanged(BR.category);
     }
 }
