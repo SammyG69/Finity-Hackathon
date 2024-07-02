@@ -11,8 +11,6 @@
             name="transaction"
             type="com.example.finityapp.Transaction"/>
     </data>
-
-
 <androidx.cardview.widget.CardView
 
     android:layout_width="match_parent"
@@ -22,7 +20,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_width="match_parent">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@{transaction.date}" android:id="@+id/textview" android:textColor="@color/black" android:textSize="24sp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        binding= DataBindingUtil.setContentView(this, R.layout.item_card);
+        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
 
 
         database=FirebaseDatabase.getInstance();
