@@ -1,6 +1,9 @@
 package com.example.finityapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +31,8 @@ public class TransactionsPage extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database;
 
+    Button button;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,8 @@ public class TransactionsPage extends AppCompatActivity {
 
         // Initialize the transactions list before using it
         transactions = new ArrayList<>();
+
+        button=findViewById(R.id.home);
 
         // Set up Firebase
         database = FirebaseDatabase.getInstance();
@@ -70,6 +77,15 @@ public class TransactionsPage extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle database error
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(TransactionsPage.this, MainActivity.class);
+
+                startActivity(i);
             }
         });
     }
