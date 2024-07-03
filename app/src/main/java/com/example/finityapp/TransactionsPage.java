@@ -2,6 +2,7 @@ package com.example.finityapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +13,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.finityapp.databinding.ActivityMainBinding;
 import com.example.finityapp.databinding.ListTransactionsBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,24 +31,20 @@ public class TransactionsPage extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database;
 
-    Button button;
+    private static final String TAG = "TransactionsPage";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_transactions);
+        // Set up Data Binding
+        binding = DataBindingUtil.setContentView(this, R.layout.list_transactions);
 
         // Initialize the transactions list before using it
         transactions = new ArrayList<>();
 
-        button=findViewById(R.id.home);
-
         // Set up Firebase
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Transactions");
-
-        // Set up Data Binding
-        binding = DataBindingUtil.setContentView(this, R.layout.list_transactions);
 
         // Set up RecyclerView
         recyclerView = binding.recyclerChicken;
@@ -80,12 +76,15 @@ public class TransactionsPage extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        // Set up button click listener
+        binding.homeButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(TransactionsPage.this, MainActivity.class);
+                Log.d(TAG, "onClick: Back Home button clicked");
 
+                Intent i = new Intent(TransactionsPage.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
