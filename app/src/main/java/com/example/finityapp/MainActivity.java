@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
    Button button;
+   Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        button2=findViewById(R.id.listButton);
         button=findViewById(R.id.transactionButton);
 
         Log.d(TAG, "onCreate: MainActivity started");
@@ -59,6 +61,16 @@ public class MainActivity extends AppCompatActivity {
                     );
 
                     startActivity(i);
+                }
+            });
+
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent t=new Intent(
+                            getApplicationContext(), TransactionsPage.class
+                    );
+                    startActivity(t);
                 }
             });
 

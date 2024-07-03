@@ -24,6 +24,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9" />
 
+    <Button
+        android:id="@+id/listButton"
+        android:layout_width="154dp"
+        android:layout_height="57dp"
+        android:text="View Transactions"
+        app:layout_constraintBottom_toTopOf="@+id/transactionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.874" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
