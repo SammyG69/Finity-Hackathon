@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
    Button button;
    Button button2;
+   Button scanbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
         button2=findViewById(R.id.listButton);
         button=findViewById(R.id.transactionButton);
+        scanbutton=findViewById(R.id.scanButton);
+
+        scanbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent f=new Intent(MainActivity.this, Activity_scanner.class);
+                startActivity(f);
+            }
+        });
 
         Log.d(TAG, "onCreate: MainActivity started");
 

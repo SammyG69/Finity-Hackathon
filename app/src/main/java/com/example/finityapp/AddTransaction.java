@@ -59,15 +59,11 @@ public class AddTransaction extends AppCompatActivity {
                     String categoryName = dataSnapshot.getKey(); // Get the name of the child node
                     categories.add(categoryName);
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
         autoCompleteTextView=findViewById(R.id.auto_complete_txt);
         adapterItem=new ArrayAdapter<String>(this, R.layout.option_list_category, categories);
         autoCompleteTextView.setAdapter(adapterItem);

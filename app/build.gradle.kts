@@ -58,6 +58,9 @@ dependencies {
 
     implementation(libs.kotlin.bom)
 
+    //Text recognition
+    implementation("com.google.mlkit:text-recognition:16.0.0")
+
 
 
 }

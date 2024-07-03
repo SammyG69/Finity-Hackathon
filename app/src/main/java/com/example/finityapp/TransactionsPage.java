@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,11 +32,15 @@ public class TransactionsPage extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database;
 
+    ImageButton button;
+
     private static final String TAG = "TransactionsPage";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        button=findViewById(R.id.imageButton);
         // Set up Data Binding
         binding = DataBindingUtil.setContentView(this, R.layout.list_transactions);
 
@@ -75,6 +80,15 @@ public class TransactionsPage extends AppCompatActivity {
                 // Handle database error
             }
         });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
         // Set up button click listener
         binding.homeButton2.setOnClickListener(new View.OnClickListener() {
