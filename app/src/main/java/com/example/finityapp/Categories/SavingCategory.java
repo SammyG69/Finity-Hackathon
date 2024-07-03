@@ -1,17 +1,13 @@
 package com.example.finityapp.Categories;
 
-import android.os.Build;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class SavingCategoryRepository {
+public class SavingCategory {
         private FirebaseDatabase database;
         private DatabaseReference databaseReference;
         private String name;
@@ -20,11 +16,12 @@ public class SavingCategoryRepository {
         private String startDate;
         private String endDate;
 
-        public SavingCategoryRepository(String categoryName, double goal, String startDate, String endDate) {
+        public SavingCategory(String categoryName, double goal, double saved, String startDate, String endDate) {
             this.database = FirebaseDatabase.getInstance();
             this.databaseReference = database.getReference("SavingCategories").child(categoryName);
             this.name = categoryName;
             this.goal = goal;
+            this.saved = saved;
             this.startDate = startDate;
             this.endDate = endDate;
 
@@ -33,7 +30,12 @@ public class SavingCategoryRepository {
         }
 
         /* getters and setters */
-        public String getName() {
+
+    public double getSaved() {
+        return saved;
+    }
+
+    public String getName() {
             return name;
         }
 
@@ -91,5 +93,16 @@ public class SavingCategoryRepository {
 
         // Format the result to 2 decimal places and return it as a String
         return String.format("%.2f", result);
+    }
+
+    @Override
+    public String toString() {
+        return "SavingCategory{" +
+                "name='" + name + '\'' +
+                ", goal=" + goal +
+                ", saved=" + saved +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.example.finityapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,43 +41,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        database=FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Transactions");
+        // Example of opening SavingActivity
+        openSavingActivity();
+    }
 
+    private void openSavingActivity() {
+        // Create intent to start SavingActivity
+        Intent intent = new Intent(MainActivity.this, SavingActivity.class);
 
-        FirebaseDatabase database= FirebaseDatabase.getInstance();
+        // Optionally, add extra data if needed
+        // intent.putExtra("key", value);
 
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        recyclerView=binding.recyclerView;
-
-        recyclerView.setAdapter(userAdapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this ));
-
-            //Fetch the data from firebase into recycler view
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                   for (DataSnapshot dataSnapshot: snapshot.getChildren() ){
-                       Transaction transaction =dataSnapshot.getValue(Transaction.class);
-                       transactions.add(transaction);
-                   }
-
-                    userAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-        userAdapter=new MyAdapter(this, transactions);
-
-
+        // Start SavingActivity
+        startActivity(intent);
     }
 }
