@@ -28,10 +28,15 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
+import android.text.TextUtils;
 
 public class Activity_scanner extends AppCompatActivity {
     Button captureBtn, button_copy;
-    TextView resultIV;
+    TextView resultIV, dateTV, amountTV;
     private static final int REQUEST_CAMERA_CODE = 100;
     Uri imageUri;
 
@@ -42,7 +47,8 @@ public class Activity_scanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
         captureBtn = findViewById(R.id.idButtonSnap);
-        resultIV = findViewById(R.id.IVdetectedText);
+        dateTV = findViewById(R.id.idDateText);
+        amountTV = findViewById(R.id.idAmountText);
 
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
@@ -71,13 +77,13 @@ public class Activity_scanner extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK && requestCode == ImagePicker.REQUEST_CODE) {
             if (data != null) {
                 imageUri = data.getData();
-
-                Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
-
-                try {
-                    recognizeText();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                if (imageUri != null) {
+                    Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
+                    try {
+                        recognizeText();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } else {
@@ -87,23 +93,48 @@ public class Activity_scanner extends AppCompatActivity {
 
     private void recognizeText() throws IOException {
         if (imageUri != null) {
-            try {
-                InputImage inputImage = InputImage.fromFilePath(Activity_scanner.this, imageUri);
-                Task<Text> result = textRecognizer.process(inputImage).addOnSuccessListener(new OnSuccessListener<Text>() {
-                    @Override
-                    public void onSuccess(Text text) {
-                        String recognizeTxt = text.getText();
-                        resultIV.setText(recognizeTxt);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Activity_scanner.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            InputImage inputImage = InputImage.fromFilePath(Activity_scanner.this, imageUri);
+            textRecognizer.process(inputImage)
+                    .addOnSuccessListener(new OnSuccessListener<Text>() {
+                        @Override
+                        public void onSuccess(Text text) {
+                            String recognizeTxt = text.getText();
+                            extractComponents(recognizeTxt);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Activity_scanner.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
+
+    private void extractComponents(String text) {
+        // Define regex patterns
+        String datePattern = "\\b\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}\\b"; // Example pattern for dates
+        String amountPattern = "\\b\\d+(?:\\.\\d{1,2})?\\b"; // Example pattern for amounts
+        String totalPattern = "(?i)total\\s*[:$]?\\s*(\\d+(?:\\.\\d{1,2})?)"; // Pattern to find total amounts
+
+        // Find date
+        Pattern pattern = Pattern.compile(datePattern);
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            String date = matcher.group();
+            dateTV.setText(date);
+        }
+
+        // Find total amount
+        pattern = Pattern.compile(totalPattern);
+        matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            String totalAmount = matcher.group(1); // Get the capturing group that contains the amount
+            amountTV.setText(totalAmount);
+        } else {
+            // If no total keyword is found, show a message (optional)
+            amountTV.setText("Total not found");
+        }
+    }
+
 }
