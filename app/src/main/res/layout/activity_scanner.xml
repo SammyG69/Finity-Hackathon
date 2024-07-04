@@ -18,36 +18,40 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintVertical_bias="0.0" />
+        />
 
 
     <TextView
         android:id="@+id/IVdetectedText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/IVcapture"
+        android:layout_width="404dp"
+        android:layout_height="233dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/buttonDetect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.111" />
 
     <Button
         android:id="@+id/idButtonSnap"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Take a snap"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IVcapture"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IVcapture" />
 
     <Button
         android:id="@+id/buttonDetect"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/IVdetectedText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883"
-        tools:layout_editor_absoluteX="0dp"
-        android:text="Detect Text"/>
+
+        android:layout_marginTop="252dp"
+        android:text="Detect Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

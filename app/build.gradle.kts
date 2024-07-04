@@ -61,6 +61,12 @@ dependencies {
     //Text recognition
     implementation("com.google.mlkit:text-recognition:16.0.0")
 
+    implementation("com.google.android.gms:play-services-vision:20.1.3")
+
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+
+
+
 
 
 }
