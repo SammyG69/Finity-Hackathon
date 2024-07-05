@@ -65,6 +65,9 @@ dependencies {
 
     implementation("com.github.dhaval2404:imagepicker:2.1")
 
+    implementation("com.google.android.material:material:1.2.0")
+
+
 
 
 

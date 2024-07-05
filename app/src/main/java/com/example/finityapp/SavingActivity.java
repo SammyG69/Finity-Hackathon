@@ -1,6 +1,7 @@
 package com.example.finityapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finityapp.Categories.SavingCategory;
 import com.example.finityapp.Categories.SavingsAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +26,8 @@ public class SavingActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<SavingCategory> savingCategories;
     private SavingsAdapter adapter;
+
+    private BottomNavigationView bottomNavigationView;
 
     private DatabaseReference databaseReference; // Firebase Database reference
 
@@ -45,6 +49,24 @@ public class SavingActivity extends AppCompatActivity {
         savingCategories = new ArrayList<>();
         loadSavingCategories();
 
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.savingNav) {
+                openActivity(SavingActivity.class);
+                return true;
+            } else if (id == R.id.spendingNav) {
+                openActivity(SavingsActivity.class);
+                return true;
+            } else if (id == R.id.transactionsNav) {
+                openActivity(TransactionsPage.class);
+                return true;
+            } else if (id == R.id.scanningNav) {
+                openActivity(Activity_scanner.class);
+                return true;
+            }
+            return false;
+        });
     }
 
     /** Loads all the Saving Categories from the firebase and initlaises the recycler view*/
@@ -75,5 +97,12 @@ public class SavingActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void openActivity(Class<?> activityClass) {
+        Intent intent = new Intent(SavingActivity.this, activityClass);
+        startActivity(intent);
+        // Optional: Add transition animations
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

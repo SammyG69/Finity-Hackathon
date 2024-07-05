@@ -21,6 +21,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -39,6 +40,8 @@ public class Activity_scanner extends AppCompatActivity {
     TextView resultIV, dateTV, amountTV;
     private static final int REQUEST_CAMERA_CODE = 100;
     Uri imageUri;
+
+    private BottomNavigationView bottomNavigationView;
 
     TextRecognizer textRecognizer;
 
@@ -67,6 +70,25 @@ public class Activity_scanner extends AppCompatActivity {
                         .maxResultSize(1080, 1080)    // Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
             }
+        });
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.savingNav) {
+                openActivity(SavingActivity.class);
+                return true;
+            } else if (id == R.id.spendingNav) {
+                openActivity(SavingsActivity.class);
+                return true;
+            } else if (id == R.id.transactionsNav) {
+                openActivity(TransactionsPage.class);
+                return true;
+            } else if (id == R.id.scanningNav) {
+                openActivity(Activity_scanner.class);
+                return true;
+            }
+            return false;
         });
     }
 
@@ -137,4 +159,10 @@ public class Activity_scanner extends AppCompatActivity {
         }
     }
 
+    private void openActivity(Class<?> activityClass) {
+        Intent intent = new Intent(Activity_scanner.this, activityClass);
+        startActivity(intent);
+        // Optional: Add transition animations
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 }
