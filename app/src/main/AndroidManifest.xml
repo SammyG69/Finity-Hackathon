@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WelcomePage"/>
+        <activity android:name=".SavingsActivity"/>
+        <activity android:name=".Activity_scanner"/>
+        <activity android:name=".TransactionsPage"/>
+        <activity android:name=".AddTransaction"/>
+        <activity android:name=".Sa"
     </application>
 
 </manifest>

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
    Button button;
    Button button2;
    Button scanbutton;
+   Button welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         button2=findViewById(R.id.listButton);
         button=findViewById(R.id.transactionButton);
         scanbutton=findViewById(R.id.scanButton);
+        welcome=findViewById(R.id.welcomePageButton);
 
         scanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
                             getApplicationContext(), TransactionsPage.class
                     );
                     startActivity(t);
+                }
+            });
+
+            welcome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent f=new Intent(MainActivity.this, WelcomePage.class);
+                    startActivity(f);
                 }
             });
 

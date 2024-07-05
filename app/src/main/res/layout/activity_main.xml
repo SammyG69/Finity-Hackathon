@@ -26,8 +26,8 @@
 
     <Button
         android:id="@+id/listButton"
-        android:layout_width="154dp"
-        android:layout_height="57dp"
+        android:layout_width="166dp"
+        android:layout_height="70dp"
         android:text="View Transactions"
         app:layout_constraintBottom_toTopOf="@+id/transactionButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +46,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.854" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomePageButton"
+        app:layout_constraintBottom_toTopOf="@+id/scanButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801"
+        android:text="Welcome Page"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
