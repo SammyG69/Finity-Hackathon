@@ -40,7 +40,6 @@ public class TransactionsPage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        button=findViewById(R.id.imageButton);
         // Set up Data Binding
         binding = DataBindingUtil.setContentView(this, R.layout.list_transactions);
 
@@ -81,12 +80,6 @@ public class TransactionsPage extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
 
