@@ -65,7 +65,7 @@ dependencies {
 
     implementation("com.github.dhaval2404:imagepicker:2.1")
 
-
+    implementation("org.jsoup:jsoup:1.17.2")
 
 
 

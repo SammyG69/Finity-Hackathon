@@ -25,20 +25,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class AddTransaction extends AppCompatActivity {
-        Button button;
-        EditText amountfield;
-        ArrayList<String> categories;
-        AutoCompleteTextView autoCompleteTextView;
-        ArrayAdapter<String> adapterItem;
-        EditText dateField;
+    Button button;
+    EditText amountfield;
+    ArrayList<String> categories;
+    AutoCompleteTextView autoCompleteTextView;
+    ArrayAdapter<String> adapterItem;
+    EditText dateField;
 
+    Transaction transaction;
 
-        Transaction transaction;
+    FirebaseDatabase database;
+    DatabaseReference dbReference;
 
-        FirebaseDatabase database;
-        DatabaseReference dbReference;
-
-        Button button2;
+    Button button2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,10 +45,10 @@ public class AddTransaction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.add_transaction);
-        categories=new ArrayList<>();
+        categories = new ArrayList<>();
 
-        database=FirebaseDatabase.getInstance();
-        dbReference=database.getReference("SpendingCategories");
+        database = FirebaseDatabase.getInstance();
+        dbReference = database.getReference("SpendingCategories");
 
         dbReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,39 +58,36 @@ public class AddTransaction extends AppCompatActivity {
                     String categoryName = dataSnapshot.getKey(); // Get the name of the child node
                     categories.add(categoryName);
                 }
+                adapterItem.notifyDataSetChanged(); // Notify adapter to update the dropdown list
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                // Handle the error
             }
         });
-        autoCompleteTextView=findViewById(R.id.auto_complete_txt);
-        adapterItem=new ArrayAdapter<String>(this, R.layout.option_list_category, categories);
+
+        autoCompleteTextView = findViewById(R.id.auto_complete_txt);
+        adapterItem = new ArrayAdapter<>(this, R.layout.option_list_category, categories);
         autoCompleteTextView.setAdapter(adapterItem);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String item=adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(AddTransaction.this,"Categories", Toast.LENGTH_SHORT).show();
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(AddTransaction.this, "Selected: " + item, Toast.LENGTH_SHORT).show();
             }
         });
 
-
-
-
-
-
-        amountfield=findViewById(R.id.amountField);
-
-        dateField=findViewById(R.id.dateField);
-        button=findViewById(R.id.addButton);
-
-        button2=findViewById(R.id.home1Button);
+        amountfield = findViewById(R.id.amountField);
+        dateField = findViewById(R.id.dateField);
+        button = findViewById(R.id.addButton);
+        button2 = findViewById(R.id.home1Button);
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent j=new Intent(getApplicationContext(), MainActivity.class);
+                Intent j = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(j);
             }
         });
@@ -99,26 +95,54 @@ public class AddTransaction extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                database=FirebaseDatabase.getInstance();
-                dbReference= database.getReference("Transactions");
+                String amount = amountfield.getText().toString();
+                String date = dateField.getText().toString();
+                String category = autoCompleteTextView.getText().toString();
 
-                String amount=amountfield.getText().toString();
-                String date=dateField.getText().toString();
-                String category=autoCompleteTextView.getText().toString();
+                if (amount.isEmpty() || date.isEmpty() || category.isEmpty()) {
+                    Toast.makeText(AddTransaction.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                transaction=new Transaction(amount, date, category);
+                database = FirebaseDatabase.getInstance();
+                dbReference = database.getReference("Transactions");
+
+                transaction = new Transaction(amount, date, category);
 
                 dbReference.push().setValue(transaction)
                         .addOnSuccessListener(aVoid -> {
-                            // Write was successful!
-                            // You can show a success message or clear the input fields here
                             amountfield.setText("");
                             autoCompleteTextView.setText("");
                             dateField.setText("");
+
+                            // Update the category amount directly here
+                            DatabaseReference categoryRef = database.getReference("SpendingCategories").child(category).child("amount");
+                            categoryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    double currentAmount = 0;
+                                    if (snapshot.exists()) {
+                                        currentAmount = snapshot.getValue(Double.class);
+                                    }
+                                    double updatedAmount = currentAmount - Double.parseDouble(amount);
+                                    categoryRef.setValue(updatedAmount)
+                                            .addOnSuccessListener(aVoid1 -> {
+                                                Toast.makeText(AddTransaction.this, "Transaction added successfully", Toast.LENGTH_SHORT).show();
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Toast.makeText(AddTransaction.this, "Failed to update category amount", Toast.LENGTH_SHORT).show();
+                                            });
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(AddTransaction.this, "Failed to read category amount", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         })
                         .addOnFailureListener(e -> {
-                            // Write failed
-                            // You can show an error message here
+                            Toast.makeText(AddTransaction.this, "Failed to add transaction", Toast.LENGTH_SHORT).show();
                         });
             }
         });
