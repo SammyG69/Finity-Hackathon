@@ -6,10 +6,35 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSavings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        android:clipToPadding="false"
+        android:layout_height="572dp"
         android:background="@android:color/white"
+        android:clipToPadding="false"
+        android:padding="8dp"
         android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/addSavingGoal"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/recyclerViewSavings"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="48dp"
+        android:text="Add a Goal"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/goHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="48dp"
+        android:layout_toStartOf="@+id/addCategory"
+        android:text="Back"
+        android:textSize="17sp" />
+
 
 </RelativeLayout>

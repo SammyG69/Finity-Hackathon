@@ -1,7 +1,10 @@
 package com.example.finityapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +24,8 @@ import java.util.ArrayList;
 
 public class SavingsActivity extends AppCompatActivity {
 
+    Button addSavingGoal, backHome;
+
     private RecyclerView recyclerView;
     private ArrayList<SavingCategory> savingCategories;
     private SavingsAdapter adapter;
@@ -33,6 +38,17 @@ public class SavingsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saving);
+
+        addSavingGoal=findViewById(R.id.addSavingGoal);
+
+        addSavingGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent j=new Intent(SavingsActivity.this, AddSavingsGoal.class);
+
+                startActivity(j);
+            }
+        });
 
         // Initialize RecyclerView and layout manager
         recyclerView = findViewById(R.id.recyclerViewSavings);
