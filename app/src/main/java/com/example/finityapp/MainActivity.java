@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
    Button button;
    Button button2;
-   Button scanbutton;
+   Button scanbutton, webScrape;
    Button welcome;
 
     @Override
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         button=findViewById(R.id.transactionButton);
         scanbutton=findViewById(R.id.scanButton);
         welcome=findViewById(R.id.welcomePageButton);
+        webScrape=findViewById(R.id.web_scrape);
 
         scanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
                             getApplicationContext(), TransactionsPage.class
                     );
                     startActivity(t);
+                }
+            });
+
+            webScrape.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent j=new Intent(MainActivity.this, WebScraping.class);
+                    startActivity(j);
                 }
             });
 
