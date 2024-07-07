@@ -1,77 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#9ACD32">
 
     <TextView
         android:id="@+id/savings_goal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:text="Please add your Savings Goal"
         android:textSize="32sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <EditText
         android:id="@+id/nameGoalField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Name of goal"
-        app:layout_constraintTop_toBottomOf="@id/savings_goal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="Name of goal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/savings_goal" />
 
     <EditText
         android:id="@+id/amountGoalField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Amount you would like to save"
-        app:layout_constraintTop_toBottomOf="@id/nameGoalField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="Saving Goal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameGoalField" />
 
     <EditText
         android:id="@+id/amountSaveField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Amount you have saved currently"
-        app:layout_constraintTop_toBottomOf="@id/amountGoalField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="Current Amount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountGoalField" />
 
     <EditText
         android:id="@+id/dateStartField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="When have you or would you like to begin this goal? (dd/mm/yyyy"
-        app:layout_constraintTop_toBottomOf="@id/amountSaveField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="Goal Start Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountSaveField" />
 
     <EditText
         android:id="@+id/dateEndField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="By when would you like to save for this?(dd/mm/yyyy)"
-        app:layout_constraintTop_toBottomOf="@id/dateStartField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="Goal Due Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateStartField" />
 
     <Button
         android:id="@+id/addSavingGoaltoDatabase"
@@ -79,10 +80,10 @@
         android:layout_height="60dp"
         android:layout_marginTop="104dp"
         android:background="@drawable/round_button"
-        app:layout_constraintEnd_toEndOf="parent"
         android:text="+"
-        android:textSize="28sp"
         android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dateEndField" />

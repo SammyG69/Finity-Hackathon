@@ -4,42 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9ACD32"
+    android:backgroundTint="#6B74B72E"
+    android:backgroundTintMode="src_over"
     tools:context=".AddTransaction">
+
 
     <TextView
         android:id="@+id/add_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Please add your transaction"
-        android:textSize="32sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp" />
-
+        android:text="Add New Transaction"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/dateField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Date of Transaction (dd/MM/yyyy)"
-        app:layout_constraintTop_toBottomOf="@id/add_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="Date"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_title" />
 
     <EditText
         android:id="@+id/amountField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Amount paid"
-        app:layout_constraintTop_toBottomOf="@id/dateField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        android:hint="$"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateField" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -57,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/category_of_transaction"
-            android:inputType="none" />
+            android:inputType="none"
+            android:textColor="#000000" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -66,12 +74,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:text="@string/add_transaction"
+        android:textColorLink="#8BC34A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintVertical_bias="0.502" />
+        app:layout_constraintVertical_bias="0.109" />
 
     <Button
         android:id="@+id/home1Button"
@@ -81,8 +90,10 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addButton" />
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintVertical_bias="0.901" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

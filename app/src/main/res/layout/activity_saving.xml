@@ -7,7 +7,7 @@
         android:id="@+id/recyclerViewSavings"
         android:layout_width="match_parent"
         android:layout_height="572dp"
-        android:background="@android:color/white"
+        android:background="#FFEEEE"
         android:clipToPadding="false"
         android:padding="8dp"
         android:scrollbars="vertical" />
@@ -20,9 +20,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="63dp"
-        android:layout_marginEnd="34dp"
+        android:layout_marginEnd="27dp"
         android:layout_marginBottom="48dp"
-        android:text="Add a Goal"
+        android:text="Add Goal"
         android:textSize="17sp" />
 
     <Button
