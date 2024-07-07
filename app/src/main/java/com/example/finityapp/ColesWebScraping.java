@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-public class WebScraping extends AppCompatActivity {
+public class ColesWebScraping extends AppCompatActivity {
 
     private static final String TAG = "WebScraping";
     TextView theText;

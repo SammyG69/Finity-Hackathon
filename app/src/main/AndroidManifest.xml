@@ -27,7 +27,8 @@
         <activity android:name=".TransactionsPage"/>
         <activity android:name=".AddTransaction"/>
         <activity android:name=".AddSavingsGoal"/>
-        <activity android:name=".WebScraping"/>
+        <activity android:name=".ColesWebScraping"/>
+        <activity android:name=".WoolworthsWebScraping"/>
     </application>
 
 </manifest>
