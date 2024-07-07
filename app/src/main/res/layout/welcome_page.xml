@@ -20,7 +20,8 @@
         android:textStyle="bold"
 
         app:flow_horizontalAlign="center"
-        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="56dp" />
 
     <TextView
@@ -33,7 +34,8 @@
         android:textColorLink="#000000"
         android:textSize="35dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="160dp" />
 
     <Button
@@ -47,6 +49,7 @@
         android:textColorLink="#ffeeee"
         android:textSize="38sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="576dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
