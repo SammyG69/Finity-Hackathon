@@ -7,71 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".Activity_scanner">
 
-    <ImageView
-        android:id="@+id/IVcapture"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="240dp"
-        android:src="@drawable/img_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <TextView
+        android:id="@+id/idListText"
+        android:layout_width="326dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="40dp"
+        android:text="List"
+        android:textAlignment="center"
+        android:textSize="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/idButtonSnap"
         app:layout_constraintStart_toStartOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
 
     <TextView
         android:id="@+id/idDateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="31dp"
-        android:text="Date"
+        android:layout_width="344dp"
+        android:layout_height="525dp"
+        android:layout_marginStart="32dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/idButtonSnap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idAmountText" />
-
-    <TextView
-        android:id="@+id/idAmountText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="69dp"
-        android:text="Amount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.695" />
 
     <Button
         android:id="@+id/idButtonSnap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Take a snap"
+        android:layout_marginBottom="124dp"
+        android:text="Show us that list mate!"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/saveNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin Saving"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IVcapture" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idButtonSnap"
-        app:layout_constraintVertical_bias="0.807" />
-
-    <Button
-        android:id="@+id/buttonDetect"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="252dp"
-        android:text="Detect Text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/idButtonSnap" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

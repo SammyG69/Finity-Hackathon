@@ -14,13 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.Manifest;
 import android.widget.Toast;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -28,28 +29,27 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.ArrayList;
-import java.util.List;
-import android.text.TextUtils;
 
 public class Activity_scanner extends AppCompatActivity {
-    Button captureBtn, button_copy, backBtn;
-    TextView resultIV, dateTV, amountTV;
+    Button captureBtn, saveBtn;
+    TextView itemsTV;
     private static final int REQUEST_CAMERA_CODE = 100;
     Uri imageUri;
 
     TextRecognizer textRecognizer;
+
+    // String array to store the items
+    String[] itemsArray;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
         captureBtn = findViewById(R.id.idButtonSnap);
-        dateTV = findViewById(R.id.idDateText);
-        amountTV = findViewById(R.id.idAmountText);
-        backBtn = findViewById(R.id.backButton);
+        itemsTV = findViewById(R.id.idDateText);
+        saveBtn=findViewById(R.id.saveNow);
+
+
 
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
@@ -59,6 +59,7 @@ public class Activity_scanner extends AppCompatActivity {
             }, REQUEST_CAMERA_CODE);
         }
 
+
         captureBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,14 +68,7 @@ public class Activity_scanner extends AppCompatActivity {
                         .compress(1024)            // Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)    // Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
-            }
-        });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent j = new Intent(getApplicationContext(), TransactionsPage.class);
-                startActivity(j);
             }
         });
     }
@@ -107,8 +101,37 @@ public class Activity_scanner extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Text>() {
                         @Override
                         public void onSuccess(Text text) {
-                            String recognizeTxt = text.getText();
-                            extractComponents(recognizeTxt);
+                            String recognizedText = text.getText();
+                            if (recognizedText != null && !recognizedText.isEmpty()) {
+                                // Split the text by line breaks
+                                String[] lines = recognizedText.split("\\r?\\n");
+                                itemsArray = lines;
+
+                                saveBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                        Intent i=new Intent(
+                                                Activity_scanner.this, WebScraping.class
+                                        );
+
+                                        i.putExtra("list", itemsArray);
+
+                                        startActivity(i);
+
+                                    }
+                                });
+
+
+                                // Optionally, display the lines in the TextView
+                                StringBuilder displayText = new StringBuilder();
+                                for (String line : lines) {
+                                    displayText.append(line).append("\n");
+                                }
+                                itemsTV.setText(displayText.toString());
+                            } else {
+                                Toast.makeText(Activity_scanner.this, "No text recognized", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -119,31 +142,5 @@ public class Activity_scanner extends AppCompatActivity {
                     });
         }
     }
-
-    private void extractComponents(String text) {
-        // Define regex patterns
-        String datePattern = "\\b\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}\\b"; // Example pattern for dates
-        String amountPattern = "\\b\\d+(?:\\.\\d{1,2})?\\b"; // Example pattern for amounts
-        String totalPattern = "(?i)total\\s*[:$]?\\s*(\\d+(?:\\.\\d{1,2})?)"; // Pattern to find total amounts
-
-        // Find date
-        Pattern pattern = Pattern.compile(datePattern);
-        Matcher matcher = pattern.matcher(text);
-        if (matcher.find()) {
-            String date = matcher.group();
-            dateTV.setText(date);
-        }
-
-        // Find total amount
-        pattern = Pattern.compile(totalPattern);
-        matcher = pattern.matcher(text);
-        if (matcher.find()) {
-            String totalAmount = matcher.group(1); // Get the capturing group that contains the amount
-            amountTV.setText(totalAmount);
-        } else {
-            // If no total keyword is found, show a message (optional)
-            amountTV.setText("Total not found");
-        }
-    }
-
 }
+
