@@ -22,7 +22,7 @@ public class WoolworthsWebScraping extends AppCompatActivity {
 
     private static final String TAG = "WebScraping";
     TextView theText;
-    String specificProductName = "Chicken Breast Lilydale"; // Change this to the product you are looking for
+    String specificProductName = "Golden Crumpets"; // Change this to the product you are looking for
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class WoolworthsWebScraping extends AppCompatActivity {
 
         theText = findViewById(R.id.textColes);
 
-        // Construct the search URL for Woolworths
+        // Construct the search URL
         String searchUrl = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             searchUrl = "https://www.woolworths.com.au/shop/search/products?searchTerm=" + URLEncoder.encode(specificProductName, StandardCharsets.UTF_8);
@@ -52,24 +52,39 @@ public class WoolworthsWebScraping extends AppCompatActivity {
                 try {
                     Log.d(TAG, "Connecting to URL: " + url);
 
-                    // Use JSoup to get the connection
+                    // Use Jsoup to get a connection
                     Connection connection = Jsoup.connect(url).userAgent("Mozilla/5.0");
                     Document document = connection.get();
 
                     Log.d(TAG, "Connection successful");
 
-                    Elements productContainers = document.select("div.product-grid-v2--tile");
+                    // Select the product containers
+                    Elements productContainers = document.select("shared-product-tile.ng-star-inserted");
+
+                    Log.d(TAG, "Found " + productContainers.size() + " product containers");
 
                     for (Element container : productContainers) {
-                        Element nameElement = container.selectFirst("h4.product-title");
+                        Log.d(TAG, "Processing container: " + container.html());
+
+                        Element nameElement = container.selectFirst("h3.shelfProductTile-descriptionLink");
                         Element priceElement = container.selectFirst("span.price");
+
+                        if (nameElement != null) {
+                            Log.d(TAG, "Product Name Element Found: " + nameElement.text());
+                        } else {
+                            Log.d(TAG, "Product Name Element Not Found");
+                        }
+
+                        if (priceElement != null) {
+                            Log.d(TAG, "Product Price Element Found: " + priceElement.text());
+                        } else {
+                            Log.d(TAG, "Product Price Element Not Found");
+                        }
 
                         if (nameElement != null && priceElement != null) {
                             String name = nameElement.text();
                             String price = priceElement.text();
                             result.append(name).append(": ").append(price).append("\n");
-                        } else {
-                            Log.d(TAG, "Name or price element not found in container");
                         }
                     }
                 } catch (IOException e) {
@@ -92,3 +107,4 @@ public class WoolworthsWebScraping extends AppCompatActivity {
         }
     }
 }
+

@@ -21,7 +21,7 @@ public class ColesWebScraping extends AppCompatActivity {
 
     private static final String TAG = "WebScraping";
     TextView theText;
-    String specificProductName = "Coles Chicken Breast Dino Nuggets"; // Change this to the product you are looking for
+    String specificProductName = "Ferrero Rocher Frozen"; // Change this to the product you are looking for
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

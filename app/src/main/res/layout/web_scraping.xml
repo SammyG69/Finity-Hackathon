@@ -8,15 +8,30 @@
 
     <TextView
         android:id="@+id/textColes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="298dp"
+        android:layout_height="326dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.37"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094" />
+
+    <TextView
+        android:id="@+id/totalCost"
+        android:layout_width="324dp"
+        android:layout_height="95dp"
+        android:textSize="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textColes"
+        app:layout_constraintVertical_bias="0.509" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

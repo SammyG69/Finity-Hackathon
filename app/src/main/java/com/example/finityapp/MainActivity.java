@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             webScrape.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent j=new Intent(MainActivity.this, WoolworthsWebScraping.class);
+                    Intent j=new Intent(MainActivity.this, WebScraping.class);
                     startActivity(j);
                 }
             });
