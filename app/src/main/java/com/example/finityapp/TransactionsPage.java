@@ -91,7 +91,7 @@ public class TransactionsPage extends AppCompatActivity {
                 openActivity(SavingsActivity.class);
                 return true;
             } else if (id == R.id.spendingNav) {
-                openActivity(SavingsActivity.class);
+                openActivity(SpendingActivity.class);
                 return true;
             } else if (id == R.id.transactionsNav) {
                 openActivity(TransactionsPage.class);

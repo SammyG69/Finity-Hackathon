@@ -124,7 +124,7 @@ public class AddTransaction extends AppCompatActivity {
                                     if (snapshot.exists()) {
                                         currentAmount = snapshot.getValue(Double.class);
                                     }
-                                    double updatedAmount = currentAmount - Double.parseDouble(amount);
+                                    double updatedAmount = currentAmount + Double.parseDouble(amount);
                                     categoryRef.setValue(updatedAmount)
                                             .addOnSuccessListener(aVoid1 -> {
                                                 Toast.makeText(AddTransaction.this, "Transaction added successfully", Toast.LENGTH_SHORT).show();

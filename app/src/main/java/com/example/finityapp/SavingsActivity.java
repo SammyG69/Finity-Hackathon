@@ -82,7 +82,6 @@ public class SavingsActivity extends AppCompatActivity {
                     // Create SavingCategory object and add to list
                     SavingCategory savingCategory = new SavingCategory(categoryName, goal, saved, startDate, endDate);
                     savingCategories.add(savingCategory);
-                    System.out.println(savingCategory);
                 }
 
                 // Initialize adapter with loaded data
@@ -103,7 +102,7 @@ public class SavingsActivity extends AppCompatActivity {
                 openActivity(SavingsActivity.class);
                 return true;
             } else if (id == R.id.spendingNav) {
-                openActivity(SavingsActivity.class);
+                openActivity(SpendingActivity.class);
                 return true;
             } else if (id == R.id.transactionsNav) {
                 openActivity(TransactionsPage.class);

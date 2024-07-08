@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".WelcomePage"/>
         <activity android:name=".SavingsActivity"/>
+        <activity android:name=".SpendingActivity"/>
         <activity android:name=".Activity_scanner"/>
         <activity android:name=".TransactionsPage"/>
         <activity android:name=".AddTransaction"/>
