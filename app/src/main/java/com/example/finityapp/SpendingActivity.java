@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,8 @@ public class SpendingActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
 
+    private Button btnNew;
+
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,18 @@ public class SpendingActivity extends AppCompatActivity {
         // Initialize saving categories list
         spendingCategories = new ArrayList<>();
         loadSpendingCategories();
+
+        btnNew=findViewById(R.id.addCategorySpending);
+
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent f=new Intent(
+                        SpendingActivity.this, AddCategory.class
+                );
+                startActivity(f);
+            }
+        });
 
 
         /* nav bar */

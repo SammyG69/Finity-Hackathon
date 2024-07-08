@@ -4,7 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SpendingCategory {
-    private FirebaseDatabase database;
+    private static final FirebaseDatabase database=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference;
     private String name;
     private double amount;  // this is the amount the user has to spend
@@ -12,7 +12,6 @@ public class SpendingCategory {
     private double limit;  // this is the limit the user has spent
 
     public SpendingCategory(String categoryName, double limit, double amount, String date) {
-        this.database = FirebaseDatabase.getInstance();
         this.databaseReference = database.getReference("SpendingCategories").child(categoryName);
         this.name = categoryName;
         this.limit = limit;
@@ -21,6 +20,11 @@ public class SpendingCategory {
 
         // Store values in the database
         saveData();
+    }
+
+
+
+    public SpendingCategory() {
     }
 
     private void saveData() {
