@@ -35,7 +35,7 @@ import java.util.List;
 import android.text.TextUtils;
 
 public class Activity_scanner extends AppCompatActivity {
-    Button captureBtn, button_copy;
+    Button captureBtn, button_copy, backBtn;
     TextView resultIV, dateTV, amountTV;
     private static final int REQUEST_CAMERA_CODE = 100;
     Uri imageUri;
@@ -49,6 +49,7 @@ public class Activity_scanner extends AppCompatActivity {
         captureBtn = findViewById(R.id.idButtonSnap);
         dateTV = findViewById(R.id.idDateText);
         amountTV = findViewById(R.id.idAmountText);
+        backBtn = findViewById(R.id.backButton);
 
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
@@ -66,6 +67,14 @@ public class Activity_scanner extends AppCompatActivity {
                         .compress(1024)            // Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)    // Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent j = new Intent(getApplicationContext(), TransactionsPage.class);
+                startActivity(j);
             }
         });
     }

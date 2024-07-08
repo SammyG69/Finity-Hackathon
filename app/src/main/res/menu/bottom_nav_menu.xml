@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/savingNav"
+        android:title="Savings"
+        android:icon="@drawable/savings_foreground"/>
+    <item
+        android:id="@+id/spendingNav"
+        android:title="Spending"
+        android:icon="@drawable/spending_foreground"/>
+    <item
+        android:id="@+id/transactionsNav"
+        android:title="Transactions"
+        android:icon="@drawable/transactions_foreground"/>
+</menu>

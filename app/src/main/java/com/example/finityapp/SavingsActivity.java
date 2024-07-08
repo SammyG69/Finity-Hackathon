@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finityapp.Categories.SavingCategory;
 import com.example.finityapp.Categories.SavingsAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +30,8 @@ public class SavingsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<SavingCategory> savingCategories;
     private SavingsAdapter adapter;
+
+    private BottomNavigationView bottomNavigationView;
 
     private DatabaseReference databaseReference; // Firebase Database reference
 
@@ -91,5 +94,29 @@ public class SavingsActivity extends AppCompatActivity {
 
             }
         });
+
+        /* nav bar */
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.savingNav) {
+                openActivity(SavingsActivity.class);
+                return true;
+            } else if (id == R.id.spendingNav) {
+                openActivity(SavingsActivity.class);
+                return true;
+            } else if (id == R.id.transactionsNav) {
+                openActivity(TransactionsPage.class);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private void openActivity(Class<?> activityClass) {
+        Intent intent = new Intent(SavingsActivity.this, activityClass);
+        startActivity(intent);
+        // Optional: Add transition animations
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

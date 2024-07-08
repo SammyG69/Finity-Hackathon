@@ -1,5 +1,6 @@
 package com.example.finityapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import com.example.finityapp.Categories.SavingCategory;
 public class AddSavingsGoal extends AppCompatActivity {
 
     EditText name,goal,current,dateStart,endStart;
-    Button addGoal;
+    Button addGoal, backBtn;
     String name1, goal1, current1, dateStart1, endStart1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class AddSavingsGoal extends AppCompatActivity {
         dateStart=findViewById(R.id.dateStartField);
         endStart=findViewById(R.id.dateEndField);
         addGoal=findViewById(R.id.addSavingGoaltoDatabase);
+        backBtn=findViewById(R.id.backBtn);
 
         addGoal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,14 @@ public class AddSavingsGoal extends AppCompatActivity {
                     Toast.makeText(AddSavingsGoal.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();}
 
 
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent j = new Intent(getApplicationContext(), SavingsActivity.class);
+                startActivity(j);
             }
         });
 

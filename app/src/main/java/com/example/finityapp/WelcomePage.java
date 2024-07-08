@@ -8,9 +8,13 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class WelcomePage extends AppCompatActivity
 {
     Button begin;
+    private BottomNavigationView bottomNavigationView;
+
 
 
     @Override
@@ -30,5 +34,6 @@ public class WelcomePage extends AppCompatActivity
                 startActivity(j);
             }
         });
+
     }
 }

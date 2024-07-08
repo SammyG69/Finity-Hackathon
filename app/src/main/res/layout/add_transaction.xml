@@ -77,7 +77,7 @@
         android:id="@+id/home1Button"
         android:layout_width="154dp"
         android:layout_height="48dp"
-        android:text="Back to Home"
+        android:text="Back"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

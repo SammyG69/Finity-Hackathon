@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finityapp.databinding.ListTransactionsBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,8 @@ public class TransactionsPage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter userAdapter;
     private ListTransactionsBinding binding;
+
+    private BottomNavigationView bottomNavigationView;
 
     DatabaseReference databaseReference;
     FirebaseDatabase database;
@@ -80,19 +83,52 @@ public class TransactionsPage extends AppCompatActivity {
             }
         });
 
-
+        /* nav bar */
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.savingNav) {
+                openActivity(SavingsActivity.class);
+                return true;
+            } else if (id == R.id.spendingNav) {
+                openActivity(SavingsActivity.class);
+                return true;
+            } else if (id == R.id.transactionsNav) {
+                openActivity(TransactionsPage.class);
+                return true;
+            }
+            return false;
+        });
 
 
         // Set up button click listener
-        binding.homeButton2.setOnClickListener(new View.OnClickListener() {
+        binding.scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: Back Home button clicked");
+                Log.d(TAG, "onClick: Scan Receipt button clicked");
 
-                Intent i = new Intent(TransactionsPage.this, MainActivity.class);
+                Intent i = new Intent(TransactionsPage.this, Activity_scanner.class);
                 startActivity(i);
                 finish();
             }
         });
+
+        binding.addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: Scan Receipt button clicked");
+
+                Intent i = new Intent(TransactionsPage.this, AddTransaction.class);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
+    private void openActivity(Class<?> activityClass) {
+        Intent intent = new Intent(TransactionsPage.this, activityClass);
+        startActivity(intent);
+        // Optional: Add transition animations
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

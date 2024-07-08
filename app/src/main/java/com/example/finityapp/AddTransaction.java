@@ -87,7 +87,7 @@ public class AddTransaction extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent j = new Intent(getApplicationContext(), MainActivity.class);
+                Intent j = new Intent(getApplicationContext(), TransactionsPage.class);
                 startActivity(j);
             }
         });
