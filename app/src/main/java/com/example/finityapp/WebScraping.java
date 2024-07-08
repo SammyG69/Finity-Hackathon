@@ -54,12 +54,15 @@ public class WebScraping extends AppCompatActivity {
                     Element firstProductContainer = document.select("div.item-landscape").first();
 
                     if (firstProductContainer != null) {
-                        // Extract specific details like title, price, etc.
+                        // Extract specific details like title, price, and retailer name
                         String title = firstProductContainer.select("span.item-description").text();
                         String priceString = firstProductContainer.select("span.price").first().text();
                         double price = parsePrice(priceString);
 
-                        results.add("Title: " + title + "\nPrice: " + priceString);
+                        Element retailerLogo = firstProductContainer.select("div.item-retailer-logo-top img").first();
+                        String retailerName = retailerLogo != null ? retailerLogo.attr("alt") : "Unknown retailer";
+
+                        results.add("Title: " + title + "\nPrice: " + priceString + "\nRetailer: " + retailerName);
                         totalCost += price;
                     } else {
                         results.add("No product container found for: " + item);
