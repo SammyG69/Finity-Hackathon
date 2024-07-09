@@ -9,18 +9,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class WelcomePage extends AppCompatActivity
 {
     Button begin;
     private BottomNavigationView bottomNavigationView;
-
+    private FirebaseFirestore db;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
+        db = FirebaseFirestore.getInstance();
 
         begin=findViewById(R.id.buttonBegin);
 

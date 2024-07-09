@@ -67,6 +67,8 @@ dependencies {
 
     implementation("org.jsoup:jsoup:1.17.2")
 
+    implementation("com.google.firebase:firebase-firestore:24.0.0")
+
 
 
 }

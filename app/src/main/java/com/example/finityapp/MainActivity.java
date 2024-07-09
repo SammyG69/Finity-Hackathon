@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finityapp.databinding.ActivityMainBinding;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAnalytics analytics;
 
 
     @Override
