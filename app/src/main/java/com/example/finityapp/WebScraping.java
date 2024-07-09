@@ -3,6 +3,8 @@ package com.example.finityapp;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ import java.util.List;
 public class WebScraping extends AppCompatActivity {
 
     TextView txt, fullAmount;
+    Button back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +29,15 @@ public class WebScraping extends AppCompatActivity {
         setContentView(R.layout.web_scraping);
         txt = findViewById(R.id.textColes);
         fullAmount = findViewById(R.id.totalCost);
+        back=findViewById(R.id.homeBackhehe);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent m=new Intent(WebScraping.this, Activity_scanner.class);
+                startActivity(m);
+            }
+        });
 
         Intent j = getIntent();
         String[] list = j.getStringArrayExtra("list");
@@ -55,14 +67,14 @@ public class WebScraping extends AppCompatActivity {
 
                     if (firstProductContainer != null) {
                         // Extract specific details like title, price, and retailer name
-                        String title = firstProductContainer.select("span.item-description").text();
+                        String title = item;
                         String priceString = firstProductContainer.select("span.price").first().text();
                         double price = parsePrice(priceString);
 
                         Element retailerLogo = firstProductContainer.select("div.item-retailer-logo-top img").first();
                         String retailerName = retailerLogo != null ? retailerLogo.attr("alt") : "Unknown retailer";
 
-                        results.add("Title: " + title + "\nPrice: " + priceString + "\nRetailer: " + retailerName);
+                        results.add("Title: " + title + "\nPrice: " + price + "\nRetailer: " + retailerName);
                         totalCost += price;
                     } else {
                         results.add("No product container found for: " + item);

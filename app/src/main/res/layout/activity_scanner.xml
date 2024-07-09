@@ -25,12 +25,13 @@
         android:layout_width="344dp"
         android:layout_height="525dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="31dp"
         android:text=""
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/idButtonSnap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idListText"
         app:layout_constraintVertical_bias="0.695" />
 
     <Button
@@ -63,9 +64,10 @@
         android:text="Back"
         app:layout_constraintBottom_toTopOf="@+id/idDateText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
