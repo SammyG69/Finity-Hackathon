@@ -31,7 +31,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 import java.io.IOException;
 
 public class Activity_scanner extends AppCompatActivity {
-    Button captureBtn, saveBtn;
+    Button captureBtn, saveBtn, btnHome;
     TextView itemsTV;
     private static final int REQUEST_CAMERA_CODE = 100;
     Uri imageUri;
@@ -48,6 +48,7 @@ public class Activity_scanner extends AppCompatActivity {
         captureBtn = findViewById(R.id.idButtonSnap);
         itemsTV = findViewById(R.id.idDateText);
         saveBtn=findViewById(R.id.saveNow);
+        btnHome=findViewById(R.id.parentBtn);
 
 
 
@@ -58,6 +59,14 @@ public class Activity_scanner extends AppCompatActivity {
                     Manifest.permission.CAMERA
             }, REQUEST_CAMERA_CODE);
         }
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent f=new Intent(Activity_scanner.this, TransactionsPage.class );
+                startActivity(f);
+            }
+        });
 
 
         captureBtn.setOnClickListener(new View.OnClickListener() {
